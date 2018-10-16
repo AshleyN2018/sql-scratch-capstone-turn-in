@@ -1,0 +1,46 @@
+ QUESTION 1
+SELECT *
+ FROM survey
+ LIMIT 10;
+
+QUESTION 2
+SELECT question,
+COUNT(user_id)
+FROM survey
+GROUP BY 1;
+
+QUESTION 3
+question			COUNT	%
+1. What are you looking for?	500	100%
+2. What's your fit?		475	95%
+3. Which shapes do you like?	380	76%
+4. Which colors do you like?	361	72%
+5. When was your last eye exam?	270	54%
+
+
+Question 4
+SELECT *
+FROM quiz
+LIMIT 5;
+
+SELECT *
+FROM home_try_on
+LIMIT 5;
+
+SELECT *
+FROM purchase
+LIMIT 5;
+
+QUESTION 5 
+SELECT DISTINCT quiz.user_id, 
+	home_try_on.user_id IS NOT NULL AS 'is_home_try_on',
+  home_try_on.number_of_pairs,
+  purchase.user_id IS NOT NULL AS 'is_purchase'
+FROM quiz
+LEFT JOIN home_try_on
+	ON quiz.user_id = home_try_on.user_id
+LEFT JOIN purchase
+	ON purchase.user_id = quiz.user_id
+LIMIT 10;
+
+
